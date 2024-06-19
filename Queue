@@ -1,0 +1,29 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Queue<int> pricesOfGoods = new Queue<int>();
+
+        pricesOfGoods.Enqueue(20);
+        pricesOfGoods.Enqueue(45);
+        pricesOfGoods.Enqueue(12);
+        pricesOfGoods.Enqueue(76);
+        pricesOfGoods.Enqueue(80);
+        pricesOfGoods.Enqueue(30);
+        pricesOfGoods.Enqueue(22);
+
+        int sumOfProfit = 0;
+        int countClients = pricesOfGoods.Count;
+
+        foreach (var price in pricesOfGoods)
+        {
+            Console.WriteLine("Осталось покупателей: " + countClients-- + "\nОбслужить покупателя <Enter>");
+            Console.ReadKey();
+
+            sumOfProfit += price;
+            Console.WriteLine("\nПокупатель обслужен. Деньги в кассе: " + sumOfProfit);
+        }
+
+        Console.WriteLine("Все клиенты обслужены!");
+    }
+}
