@@ -13,15 +13,14 @@ internal class Program
         pricesOfGoods.Enqueue(22);
 
         int sumOfProfit = 0;
-        int countClients = pricesOfGoods.Count;
 
-        foreach (var price in pricesOfGoods)
+        for (int i = pricesOfGoods.Count; i > 0; i--)
         {
-            Console.WriteLine("Осталось покупателей: " + countClients-- + "\nОбслужить покупателя <Enter>");
+            Console.WriteLine("Осталось покупателей: " + i + "\nОбслужить покупателя <Enter>");
             Console.ReadKey();
 
-            sumOfProfit += price;
-            Console.WriteLine("\nПокупатель обслужен. Деньги в кассе: " + sumOfProfit);
+            sumOfProfit += pricesOfGoods.Dequeue();
+            Console.WriteLine("\nПокупатель обслужен. Деньги в кассе: " + sumOfProfit +"\n");
         }
 
         Console.WriteLine("Все клиенты обслужены!");
