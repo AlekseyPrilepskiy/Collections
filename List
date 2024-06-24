@@ -1,0 +1,43 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        const string CommandSum = "sum";
+        const string CommandExit = "exit";
+
+        List<int> numbers = new List<int>();
+
+        string input;
+
+        bool isWork = true;
+
+        while (isWork)
+        {
+            input = Console.ReadLine();
+
+            switch (input)
+            {
+                case CommandSum:
+                    Console.WriteLine($"Сумма: {numbers.Sum()}");
+                    break;
+
+                case CommandExit:
+                    isWork = false;
+
+                    Console.WriteLine("Выход из программы...");
+                    break;
+
+                default:
+                    if (int.TryParse(input, out int number) == true)
+                    {
+                        numbers.Add(number);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неккоректный ввод.");
+                    }
+                    break;
+            }
+        }
+    }
+}
