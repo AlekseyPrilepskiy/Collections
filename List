@@ -11,6 +11,8 @@ internal class Program
 
         bool isWork = true;
 
+        Console.WriteLine("Вводите числа, чтобы их запомнить\nЧтобы посчитать сумму, введите 'sum'\nДля выхода введите 'exit'");
+
         while (isWork)
         {
             input = Console.ReadLine();
@@ -18,26 +20,41 @@ internal class Program
             switch (input)
             {
                 case CommandSum:
-                    Console.WriteLine($"Сумма: {numbers.Sum()}");
+                    ShowSum(numbers);
                     break;
 
                 case CommandExit:
-                    isWork = false;
-
-                    Console.WriteLine("Выход из программы...");
+                    CloseProgramm(ref isWork);
                     break;
 
                 default:
-                    if (int.TryParse(input, out int number) == true)
-                    {
-                        numbers.Add(number);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Неккоректный ввод.");
-                    }
+                    AddNumber(numbers, input);
                     break;
             }
+        }
+    }
+
+    private static void ShowSum(List<int> numbers) 
+    {
+        Console.WriteLine($"Сумма: {numbers.Sum()}");
+    }
+
+    private static void CloseProgramm(ref bool isWork)
+    {
+        isWork = false;
+
+        Console.WriteLine("Выход из программы...");
+    }
+
+    private static void AddNumber(List<int> numbers, string input)
+    {
+        if (int.TryParse(input, out int number) == true)
+        {
+            numbers.Add(number);
+        }
+        else
+        {
+            Console.WriteLine("Неккоректный ввод.");
         }
     }
 }
