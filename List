@@ -11,7 +11,7 @@ internal class Program
 
         bool isWork = true;
 
-        Console.WriteLine("Вводите числа, чтобы их запомнить\nЧтобы посчитать сумму, введите 'sum'\nДля выхода из программы введите 'exit'");
+        Console.WriteLine($"Вводите числа, чтобы их запомнить\nЧтобы посчитать сумму, введите '{CommandSum}'\nДля выхода из программы введите '{CommandExit}'");
 
         while (isWork)
         {
@@ -49,7 +49,7 @@ internal class Program
 
     private static void AddNumber(List<int> numbers, string input)
     {
-        if (int.TryParse(input, out int number) == true)
+        if (int.TryParse(input, out int number))
         {
             numbers.Add(number);
         }
