@@ -1,0 +1,43 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        List<string> list1 = ["1", "2", "1", "4"];
+        List<string> list2 = ["3", "2", "3", "5", "3"];
+
+        list1.AddRange(list2);
+
+        List<string> unitedList = list1;
+
+        unitedList = EliminateRepetitions(unitedList);
+
+        ShowList(unitedList);
+    }
+
+    private static List<string> EliminateRepetitions(List<string> unitedList)
+    {
+        List<string> listWithoutRepeats = new List<string>();
+
+        for (int i = 0; i < unitedList.Count; i++)
+        {
+            if (listWithoutRepeats.Contains(unitedList[i]))
+            {
+                continue;
+            }
+            else
+            {
+                listWithoutRepeats.Add(unitedList[i]);
+            }
+        }
+
+        return listWithoutRepeats;
+    }
+
+    private static void ShowList(List<string> list)
+    {
+        foreach (string value in list)
+        {
+            Console.Write(value);
+        }
+    }
+}
