@@ -1,0 +1,118 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        const int CommandAddEmployee = 1;
+        const int CommandDeleteEmployee = 2;
+        const int CommandShowDossier = 3;
+        const int CommandExit = 4;
+
+        bool isWork = true;
+
+        Dictionary<string, List<string>> jobsEmployees = new Dictionary<string, List<string>>();
+
+        jobsEmployees.Add("Разработчик", ["Алексей"]);
+
+        while (isWork)
+        {
+            Console.WriteLine($"{CommandAddEmployee} - Добавить сотрудника");
+            Console.WriteLine($"{CommandDeleteEmployee} - Удалить сотрудника");
+            Console.WriteLine($"{CommandShowDossier} - Показать всех сотрудников");
+            Console.WriteLine($"{CommandExit} - Выход из программы");
+
+            int.TryParse(Console.ReadLine(), out int userInput);
+
+            switch (userInput)
+            {
+                case CommandAddEmployee:
+                    AddEmployee(jobsEmployees);
+                    break;
+
+                case CommandDeleteEmployee:
+                    DeleteEmployee(jobsEmployees);
+                    break;
+
+                case CommandShowDossier:
+                    ShowDossier(jobsEmployees);
+                    break;
+
+                case CommandExit:
+                    isWork = false;
+                    break;
+
+                default:
+                    Console.WriteLine("Неверная команда.");
+                    break;
+            }
+        }
+    }
+
+    private static void AddEmployee(Dictionary<string, List<string>> jobsEmployees)
+    {
+        Console.Write("Введите имя сотрудника для добавления: ");
+        string name = Console.ReadLine();
+
+        Console.Write("На какую должность его назначаете: ");
+        string job = Console.ReadLine();
+
+        bool isJobExist = jobsEmployees.ContainsKey(job);
+
+        if (isJobExist == true)
+        {
+            jobsEmployees[job].Add(name);
+        }
+        else
+        {
+            jobsEmployees.TryAdd(job, new List<string> {name});
+        }
+    }
+
+    private static void DeleteEmployee(Dictionary<string, List<string>> jobsEmployees)
+    {
+        Console.WriteLine("Выберите должность сотрудника для удаления");
+        string job = Console.ReadLine();
+
+        if (jobsEmployees.ContainsKey(job))
+        {
+            Console.WriteLine("Выберите номер сотрудника для удаления");
+            int.TryParse(Console.ReadLine(), out int numberEmployeeInList);
+
+            if (numberEmployeeInList <= 0 || numberEmployeeInList > jobsEmployees[job].Count)
+            {
+                Console.WriteLine("Неверный индекс");
+                return;
+            }
+            else
+            {
+                jobsEmployees[job].RemoveAt(numberEmployeeInList - 1);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Такой должности нет");
+        }
+
+        foreach (var post in jobsEmployees)
+        {
+            if (post.Value.Count == 0)
+            {
+                jobsEmployees.Remove(post.Key);
+            }
+        }
+    }
+
+    private static void ShowDossier(Dictionary<string, List<string>> jobsEmployees)
+    {
+        foreach (var job in jobsEmployees.Keys)
+        {
+            Console.Write(job + " - ");
+
+            foreach (var employee in jobsEmployees[job])
+            {
+                Console.Write(employee + " | ");
+            }
+
+            Console.WriteLine();
+        }
+    }
+}
