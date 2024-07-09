@@ -5,39 +5,14 @@ internal class Program
         List<string> list1 = ["1", "2", "1", "4"];
         List<string> list2 = ["3", "2", "3", "5", "3"];
 
-        list1.AddRange(list2);
+        HashSet<string> listWithoutRepeat = new HashSet<string>(list1);
+        listWithoutRepeat.UnionWith(list2);
 
-        List<string> unitedList = list1;
+        Console.Write("Итоговый список: ");
 
-        unitedList = EliminateRepetitions(unitedList);
-
-        ShowList(unitedList);
-    }
-
-    private static List<string> EliminateRepetitions(List<string> unitedList)
-    {
-        List<string> listWithoutRepeats = new List<string>();
-
-        for (int i = 0; i < unitedList.Count; i++)
+        foreach (string digit in listWithoutRepeat)
         {
-            if (listWithoutRepeats.Contains(unitedList[i]))
-            {
-                continue;
-            }
-            else
-            {
-                listWithoutRepeats.Add(unitedList[i]);
-            }
-        }
-
-        return listWithoutRepeats;
-    }
-
-    private static void ShowList(List<string> list)
-    {
-        foreach (string value in list)
-        {
-            Console.Write(value);
+            Console.Write(digit);
         }
     }
 }
